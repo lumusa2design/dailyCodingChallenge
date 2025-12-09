@@ -1,18 +1,19 @@
 """
+Given an array of elements, return the element that appears most frequently.
 
-Given a weight in pounds as a number, return the string "(lbs) pounds equals (kgs) kilograms.".
-
-    Replace "(lbs)" with the input number.
-    Replace "(kgs)" with the input converted to kilograms, rounded to two decimals and always include two decimal places in the value.
-    1 pound equals 0.453592 kilograms.
-    If the input is 1, use "pound" instead of "pounds".
-    If the converted value is 1, use "kilogram" instead of "kilograms".
-
+    There will always be a single most frequent element.
 """
 
-def convert_to_kgs(lbs):
-    kgs = round(lbs * 0.453592, 2)
-    lbs_unit = "pound" if lbs == 1 else "pounds"
-    kgs_unit = "kilogram" if kgs == 1 else "kilograms"
-    return f"{lbs} {lbs_unit} equals {kgs:.2f} {kgs_unit}."
-
+def most_frequent(arr):
+    frequency = {}
+    for i in arr:
+        if i not in frequency:
+            frequency[i] = 1
+        else:
+            frequency[i] += 1
+    max_freq = 0
+    for key, value in frequency.items():
+        if value > max_freq:
+            max_freq = value
+            arr = key
+    return arr
