@@ -1,0 +1,20 @@
+"""
+
+Given a 2D array representing the inventory of your store, and another 2D array representing a shipment you have received, return your updated inventory.
+
+    Each element in the arrays will have the format: [quantity, "item"], where quantity is an integer and "item" is a string.
+    Update items in the inventory by adding the quantity of any matching items from the shipment.
+    If a received item does not exist in the current inventory, add it as a new entry to the end of the inventory.
+    Return inventory in the order it was given with new items at the end in the order they appear in the shipment.
+
+For example, given an inventory of [[2, "apples"], [5, "bananas"]] and a shipment of [[1, "apples"], [3, "bananas"]], return [[3, "apples"], [8, "bananas"]].
+"""
+def update_inventory(inventory, shipment):
+    inventory_dict = {item[1]: item[0] for item in inventory}
+    for quantity, item in shipment:
+        if item in inventory_dict:
+            inventory_dict[item] += quantity
+        else:
+            inventory.append([quantity, item])
+
+    return inventory
