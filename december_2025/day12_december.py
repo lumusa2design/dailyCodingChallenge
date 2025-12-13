@@ -10,11 +10,13 @@ Given a 2D array representing the inventory of your store, and another 2D array 
 For example, given an inventory of [[2, "apples"], [5, "bananas"]] and a shipment of [[1, "apples"], [3, "bananas"]], return [[3, "apples"], [8, "bananas"]].
 """
 def update_inventory(inventory, shipment):
-    inventory_dict = {item[1]: item[0] for item in inventory}
-    for quantity, item in shipment:
-        if item in inventory_dict:
-            inventory_dict[item] += quantity
+    pos = {item: i for i, (qty, item) in enumerate(inventory)}
+
+    for qty, item in shipment:
+        if item in pos:
+            inventory[pos[item]][0] += qty
         else:
-            inventory.append([quantity, item])
+            pos[item] = len(inventory)
+            inventory.append([qty, item])
 
     return inventory
